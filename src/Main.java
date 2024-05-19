@@ -5,7 +5,7 @@ public class Main {
         Serviciu serviciu = Serviciu.getInstance();
 
         String str = serviciu.getUserInput();
-        while (str != "stop")
+        while (!str.equals("stop"))
         {
             serviciu.processInput(str);
             str = serviciu.getUserInput();
