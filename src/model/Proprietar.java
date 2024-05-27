@@ -7,14 +7,19 @@ import java.util.Scanner;
 public class Proprietar {
     protected String nume;
     protected int suma_bani;
-    private List<Locuinta> locuinte = new ArrayList<Locuinta>();
-    Scanner scanner = new Scanner(System.in);
 
     public Proprietar() {
+
+    }
+
+    public Proprietar(Scanner scanner)
+    {
+        System.out.println("Nume:");
         String nume = scanner.nextLine();
         this.nume = nume;
-        int suma = scanner.nextInt();
-        this.suma_bani = suma;
+        System.out.println("Suma bani:");
+        int bani = scanner.nextInt();
+        this.suma_bani = bani;
     }
 
     public Proprietar(String nume, int suma_bani) {
@@ -25,6 +30,11 @@ public class Proprietar {
         return nume;
     }
 
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+
     public void setSuma_bani(int suma_bani) {
         this.suma_bani = suma_bani;
     }
@@ -33,21 +43,13 @@ public class Proprietar {
         return suma_bani;
     }
 
-    public List<Locuinta> getLocuinte() {
-        return locuinte;
-    }
-
-    public void addLocuinta(Locuinta locuinta) {
-        locuinte.add(locuinta);
-    }
-
-    public void deleteLocuinta(int id) {
-        locuinte.removeIf(l -> l.getId() == id);
-    }
 
     @Override
     public String toString() {
-        return "Proprietar [nume=" + nume + "]";
+        return  nume + " suma bani= " + suma_bani;
     }
+
+
+
 
 }

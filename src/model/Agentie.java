@@ -5,30 +5,31 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Agentie extends Proprietar {
-    private List<Agent> agenti = new ArrayList<>();
     private int comision;
-    private Scanner scanner = new Scanner(System.in);
 
-    public Agentie(){
-        super();
-        System.out.println("Comision: ");
-        String s = scanner.nextLine();
-        comision = Integer.parseInt(s);
-    }
-    public void addAgent(Agent ag){
-        agenti.add(ag);
+    public Agentie() {}
+    public Agentie(Scanner scanner){
+        super(scanner);
+        System.out.println(" - Comision(numere 0-100!): ");
+        int s = scanner.nextInt();
+        this.comision = s;
     }
 
-    public void deleteAgent(String nume){
-        agenti.removeIf(ag -> ag.getNume().equals(nume));
+    public void setComision(int comision) {
+        this.comision = comision;
+    }
+
+
+    public int getComision() {
+        return comision;
     }
 
     @Override
     public String toString() {
-        return "Agentie {" +
-                      "Nume : '" + super.nume + '\'' +
-                      ", Comision ='" + String.valueOf(comision) + '\'' +
-                      ", Suma disponibila =" + String.valueOf(super.suma_bani) + "}" ;
+        return
+                      super.nume +
+                      " Comision ='" + String.valueOf(comision) +
+                      ", Suma disponibila =" + String.valueOf(super.suma_bani);
 
     }
 }

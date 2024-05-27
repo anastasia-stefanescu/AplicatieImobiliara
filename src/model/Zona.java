@@ -8,21 +8,18 @@ import java.util.Scanner;
 
 public class Zona {
     public String nume;
-    private List<Locuinta> locuinte = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
 
-    public void Zona() {
+    public Zona() {}
+
+    public Zona(Scanner scanner) {
         System.out.println("Nume: ");
         String s = scanner.nextLine();
         nume = s;
     }
 
-    public void addLocuinta(Locuinta locuinta) {
-        locuinte.add(locuinta);
-    }
 
-    public void deleteLocuinta(int id) {
-        locuinte.removeIf(l -> l.getId() == id);
+    public void setNume(String nume) {
+        this.nume = nume;
     }
 
     public String getNume() {
@@ -30,9 +27,7 @@ public class Zona {
     }
     @Override
     public String toString() {
-        return "Zona {" +
-                "Nume : '" + nume + '\'' +
-                 "}" ;
+        return nume;
 
     }
 

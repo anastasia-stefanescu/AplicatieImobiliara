@@ -8,25 +8,28 @@ public class Cumparator {
     private int id;
     private String nume;
     private int suma_bani;
-    private List<Locuinta> locuinte_preferate = new ArrayList<>();
-
-    private List<Zona> zone_preferate = new ArrayList<>();
-
-    private List<Proprietar> proprietari_preferati = new ArrayList<>();
 
     private int an1, an2;
     private int nr_camere;
     private String tip;
 
-    public Cumparator(int id) {
-        Scanner scanner = new Scanner(System.in);
-        this.id = id;
+    public Cumparator(){}
+
+    public Cumparator(Scanner scanner) {
         System.out.println("Nume: ");
         String s = scanner.nextLine();
         this.nume = s;
         System.out.println("suma bani: ");
         s = scanner.nextLine();
         this.suma_bani = Integer.parseInt(s);
+    }
+
+    public String getNume() {
+        return nume;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
     }
 
     public int getId() {
@@ -55,15 +58,7 @@ public class Cumparator {
         return an2;
     }
 
-    public List<Zona> getZone_preferate()
-    {
-        return zone_preferate;
-    }
 
-    public List<Proprietar> getProprietari_preferati()
-    {
-        return proprietari_preferati;
-    }
 
     public int getSuma_bani()
     {
@@ -94,16 +89,18 @@ public class Cumparator {
         this.nr_camere = nr_camere;
     }
 
-    public void addZone(Zona zone) {
-        zone_preferate.add(zone);
+
+    @Override
+    public String toString() {
+        return
+                id +
+                " Nume =" + nume +
+                ", Suma_bani =" + String.valueOf(suma_bani) +
+                ", tip preferat: '" + tip + '\'' +
+                ", Numar camere =" + String.valueOf(nr_camere) +
+                ", An constructie 1=" + String.valueOf(an1) + " - " + String.valueOf(an2)
+                        ;
     }
 
-    public void addProprietar(Proprietar prop) {
-       proprietari_preferati.add(prop);
-    }
-
-    public void addLocuinta(Locuinta locuinta) {
-        locuinte_preferate.add(locuinta);
-    }
 }
 

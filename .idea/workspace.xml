@@ -4,13 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b52a4c78-e702-45dc-bf21-616da5b19572" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/serviciu/ServiciuCumparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/serviciu/ServiciuProprietar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/serviciu/ServiciuZona.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="b52a4c78-e702-45dc-bf21-616da5b19572" name="Changes" comment="switch string?">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_4_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/exceptions/DateIncomplete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/exceptions/InputGresit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/RepoAgent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/RepoAgentie.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/RepoCumparator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/RepoLocuinta.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/RepoProprietar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/repository/RepoZona.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/serviciu/FileManagement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AplicatieImobiliara.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AplicatieImobiliara.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Agent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/Agentie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Agentie.java" afterDir="false" />
@@ -22,6 +28,9 @@
       <change beforePath="$PROJECT_DIR$/src/serviciu/InterfataOperatii_simple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviciu/InterfataOperatii_simple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serviciu/Serviciu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviciu/Serviciu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/serviciu/ServiciuAgentie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviciu/ServiciuAgentie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviciu/ServiciuCumparator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviciu/ServiciuCumparator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviciu/ServiciuProprietar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviciu/ServiciuProprietar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/serviciu/ServiciuZona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/serviciu/ServiciuZona.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +74,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.run_config1.executor": "Debug",
+    "Application.run_config1.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -77,6 +86,9 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "onboarding.tips.debug.path": "/Users/anastasiastefanescu/IdeaProjects/AplicatieImobiliara/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
@@ -117,8 +129,28 @@
       <workItem from="1715083638704" duration="5315000" />
       <workItem from="1715185992782" duration="3349000" />
       <workItem from="1715191867834" duration="8592000" />
-      <workItem from="1716022897977" duration="32439000" />
+      <workItem from="1716022897977" duration="35683000" />
+      <workItem from="1716471193874" duration="49050000" />
+      <workItem from="1716617788644" duration="1698000" />
+      <workItem from="1716793990233" duration="27665000" />
     </task>
+    <task id="LOCAL-00001" summary="switch string?">
+      <option name="closed" value="true" />
+      <created>1716143115243</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1716143115243</updated>
+    </task>
+    <task id="LOCAL-00002" summary="switch string?">
+      <option name="closed" value="true" />
+      <created>1716143176399</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1716143176399</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -129,19 +161,35 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="switch string?" />
+    <option name="LAST_COMMIT_MESSAGE" value="switch string?" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>6</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/src/serviciu/FileManagement.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

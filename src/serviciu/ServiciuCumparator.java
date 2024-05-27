@@ -1,77 +1,64 @@
 package serviciu;
 
-import model.Agent;
-import model.Agentie;
-import model.Locuinta;
-import model.Cumparator;
+import model.*;
+import repository.RepoCumparator;
 
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 public class ServiciuCumparator implements InterfataOperatii_simple<Cumparator>
 {
-    private List<Cumparator> cumparatori =  new ArrayList<>();
-
-
+    Scanner scanner = new Scanner(System.in);
     public ServiciuCumparator() {
     }
 
-    public List<Cumparator> getCumparatori() {
-        return cumparatori;
-    }
-
     @Override
-    public void adauga()
-    {
-        int s = cumparatori.size()+1;
-        Cumparator c = new Cumparator(s); //automat si citeste datele de intrare
-        cumparatori.add(c);
+    public void adauga() throws SQLException {
+        Cumparator c = new Cumparator(scanner); //automat si citeste datele de intrare
+        RepoCumparator.adauga_Cumparator(c);
         //de adaugat la string buffer (audit?)
     }
 
     @Override
-    public void sterge(Scanner scanner)
-    {
+    public void sterge(Scanner scanner) throws SQLException, IOException {
         System.out.print("Introduceti id-ul cumparatorului de sters: ");
         int ind = scanner.nextInt();
 
-        cumparatori.removeIf(c -> c.getId() == ind);
+        RepoCumparator.sterge_Cumparator(ind);
     }
 
     @Override
-    public void listeaza()
-    {
+    public void listeaza() throws SQLException {
+        List<Cumparator> cumparatori = RepoCumparator.getAllCumparatori();
         for (int i = 0; i < cumparatori.size(); i++) {
             System.out.println(cumparatori.get(i));
         }
     }
 
-    public Cumparator citeste(Scanner scanner){
+    public Cumparator citeste(Scanner scanner) throws SQLException {
         while (true) {
             System.out.print("\"Introduceti id-ul cumparatorului de citit: ");
             String ind = scanner.nextLine();
 
 
-            Optional<Cumparator> c = cauta(ind);
-            if (c.isPresent())
+            Cumparator c = cauta(ind);
+            if (c != null)
             {
-                return c.get();
+                return c;
             }
         }
 
     }
 
-    public Optional<Cumparator> cauta(String ind)
-    {
+    public Cumparator cauta(String ind) throws SQLException {
         int id  = Integer.parseInt(ind);
-        Optional<Cumparator> found = cumparatori.stream()
-                .filter(c -> c.getId() == id)
-                .findFirst(); // Find the first matching element
+        Cumparator found = RepoCumparator.cautaCumparator(id);
 
-        if (!found.isPresent())
+        if ( found == null)
             System.out.println("Nu exista cumparatorul " + ind);
 
         return found;

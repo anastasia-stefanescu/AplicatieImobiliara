@@ -1,54 +1,56 @@
 package serviciu;
 
 import model.Locuinta;
+import model.Proprietar;
 import model.Zona;
+import repository.RepoLocuinta;
+import repository.RepoProprietar;
+import repository.RepoZona;
 
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.*;
 
 public class ServiciuZona implements InterfataOperatii_simple<Zona>, InterfataOperatii_complexe<Zona> {
-    private List<Zona> zone =  new ArrayList<>();
 
+    Scanner sc = new Scanner(System.in);
     public ServiciuZona() {
     }
 
-    public List<Zona> getZona() {
-        return zone;
-    }
-
     @Override
-    public void adauga()
-    {
-        Zona z = new Zona(); //automat si citeste datele de intrare
-        zone.add(z);
+    public void adauga() throws SQLException {
+        Zona z = new Zona(sc); //automat si citeste datele de intrare
+        RepoZona.adauga_Zona(z);
+
         //de adaugat la string buffer (audit?)
     }
 
     @Override
-    public void sterge(Scanner scanner)
-    {
+    public void sterge(Scanner scanner) throws SQLException, IOException {
         System.out.print("Introduceti numele zonei de sters: ");
         String nume = scanner.nextLine();
 
-        zone.removeIf(z -> z.nume.equals(nume));
+        RepoZona.sterge_Zona(nume);
     }
 
     @Override
-    public void listeaza()
-    {
+    public void listeaza() throws SQLException {
+        List<Zona> zone = RepoZona.getAllZone();
         for (int i = 0; i < zone.size(); i++) {
             System.out.println(zone.get(i).toString());
         }
     }
 
     @Override
-    public void adauga_la(Zona z, String tip, Scanner scanner)
-    {
+    public void adauga_la(Zona z, String tip, Scanner scanner) throws SQLException, IOException {
         //poate fi doar locuinta
         if (tip.equals("locuinta") ){
-            Locuinta loc = new Locuinta(scanner);
-            loc.setZona(z);
-            z.addLocuinta(loc);
+            System.out.print("Introduceti id locuinta : ");
+            int id = scanner.nextInt();
+            Locuinta loc = RepoLocuinta.cautaLocuinta(id);
+//            if (loc == null) RepoLocuinta.adauga_Locuinta(loc);
+            RepoLocuinta.actualizeaza_Locuinta_Zona(loc.getId(), z.getNume());
         }
         else
             System.out.println("comanda incorecta");
@@ -56,46 +58,35 @@ public class ServiciuZona implements InterfataOperatii_simple<Zona>, InterfataOp
 
 
     @Override
-    public void sterge_de_la(Zona z, String tip, Scanner scanner)
-    {
+    public void sterge_de_la(Zona z, String tip, Scanner scanner) throws SQLException, IOException {
         if (tip.equals("locuinta")) {
             System.out.print("Introduceti id-ul locuintei de sters: ");
-            String s = scanner.nextLine();
-            //trb scos si proprietarul locuintei !!!!!
-            z.deleteLocuinta(Integer.parseInt(s));
+            int s = scanner.nextInt();
+            RepoLocuinta.actualizeaza_Locuinta_Zona(s, null);
         }
         else
             System.out.println("comanda incorecta");
     }
 
     @Override
-    public Zona citeste(Scanner scanner)
-    {
+    public Zona citeste(Scanner scanner) throws SQLException {
         while (true) {
             System.out.println("Numele zonei: ");
             String nume = scanner.nextLine();
             nume.toLowerCase();
 
-            Optional<Zona> ag = cauta(nume);
-            if (ag.isPresent())
-            {
-                return ag.get();
-            }
+            Zona ag = cauta(nume);
+            if (ag!= null)
+                return ag;
         }
     }
 
     @Override
-    public Optional<Zona> cauta(String nume)
-    {
-        Optional<Zona> foundZone = zone.stream()
-                .filter(z -> z.nume.equals(nume))
-                .findFirst(); // Find the first matching element
+    public Zona cauta(String nume) throws SQLException {
+        Zona foundZone = RepoZona.cautaZona(nume);
 
-        if (foundZone.isPresent())
-            return foundZone;
-        else {
+        if (foundZone == null)
             System.out.println("Nu exista zona " + nume);
-            return null;
-        }
+        return foundZone;
     }
 }

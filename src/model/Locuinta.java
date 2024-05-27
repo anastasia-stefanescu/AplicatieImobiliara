@@ -4,29 +4,34 @@ import java.util.Scanner;
 
 public class Locuinta {
     private int id;
-    private final String tip;
-    private Proprietar proprietar;
+    private String tip;
+    private String proprietar; //numele proprietarului
     private int cost;
-    private Zona zona;
-    private final String adresa;
-    private final int nr_camere;
-    private final int an_constructie;
-    private final int suprafata;
+    private String zona;
+    private String adresa;
+    private int nr_camere;
+    private int an_constructie;
+    private int suprafata;
 
+    public Locuinta() {}
 
     public Locuinta(Scanner scanner) {
-      System.out.println("tip : ");
-      tip  = scanner.nextLine();
-      System.out.println("adresa : ");
-      adresa = scanner.nextLine();
       System.out.println("nr_camere : ");
-      nr_camere  = scanner.nextInt();
+      int nr = scanner.nextInt();
+      this.nr_camere  = nr;
       System.out.println("an_constructie : ");
-      an_constructie = scanner.nextInt();
-      System.out.println("suprafata : ");
-      suprafata = scanner.nextInt();
-        System.out.println("cost : ");
-        cost = scanner.nextInt();
+      nr =  scanner.nextInt();
+      this.an_constructie = nr;
+      System.out.println("suprafata : ");nr =  scanner.nextInt();
+      this.suprafata = nr;
+      System.out.println("cost : ");
+      nr =  scanner.nextInt();
+      this.cost = nr;
+      String ceva  = scanner.nextLine();
+      System.out.println("tip : ");
+      this.tip  = scanner.nextLine();
+      System.out.println("adresa : ");
+      this.adresa = scanner.nextLine();
 
     }
 
@@ -47,12 +52,12 @@ public class Locuinta {
 
     }
 
-    public Zona getZona()
+    public String getZona()
     {
         return zona;
     }
 
-    public Proprietar getProprietar(){
+    public String getProprietar(){
         return proprietar;
     }
 
@@ -60,32 +65,72 @@ public class Locuinta {
         return cost;
     }
 
-    public void setZona(Zona zona) {
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public void setNr_camere(int nr_camere) {
+        this.nr_camere = nr_camere;
+    }
+
+    public void setAn_constructie(int an_constructie) {
+        this.an_constructie = an_constructie;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+
+    public void setZona(String zona) {
         this.zona = zona;
     }
 
-    public void setProprietar(Proprietar proprietar) {
+    public void setProprietar(String proprietar) {
         this.proprietar = proprietar;
+    }
+
+    public int getSuprafata() {
+        return suprafata;
+    }
+
+    public void setSuprafata(int suprafata) {
+        this.suprafata = suprafata;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
     }
 
     public void vizualizare()
     {
-        String viz = this.toString() + '\n' + adresa + '\n' + proprietar.toString() + '\n' + zona.toString() + '\n' + suprafata;
+        String viz;
+        if (zona == null)
+            viz = this.toString() + '\n' + adresa + '\n' + proprietar.toString() + '\n' + suprafata;
+        else
+             viz = this.toString() + '\n' + adresa + '\n' + proprietar.toString() + '\n' + zona.toString() + '\n' + suprafata;
         System.out.println(viz);
     }
 
     @Override
     public String toString() {
-        return "Locuinta {" +
-                "ID : '" + id + '\'' +
-                ", tip : '" + tip + '\'' +
-                //", "  + proprietar.toString() +
-               // ", "  + zona.toString() +
-               // ", Adresa : '" + adresa + '\'' +
+        return
+                id +
+                " tip : " + tip +
+                ", "  + proprietar +
+               ", "  + zona +
+                ", Adresa : " + adresa +
                 ", Numar camere =" + String.valueOf(nr_camere) +
                 ", An constructie =" + String.valueOf(an_constructie) +
-                ", Suprafata =" + String.valueOf(suprafata) +
-                 "}" ;
+                ", Suprafata =" + String.valueOf(suprafata) ;
 
     }
 }

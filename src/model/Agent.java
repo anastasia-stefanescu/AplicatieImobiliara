@@ -6,16 +6,23 @@ import java.util.Scanner;
 
 public class Agent {
     private String nume;
-    private Agentie agentie;
-    private List<Locuinta> locuinte = new ArrayList<>();
+    private String agentie;
 
-    public void Agent(Scanner scanner) {
+    public Agent(String nume, String agentie) {
+        this.nume = nume;
+
+    }
+    public Agent(Scanner scanner) {
         System.out.println("Nume: ");
         String s = scanner.nextLine();
         nume = s;
     }
 
-    public void setAgentie(Agentie agentie) {
+    public String getAgentie() {
+        return agentie;
+    }
+
+    public void setAgentie(String agentie) {
         this.agentie = agentie;
     }
 
@@ -25,7 +32,7 @@ public class Agent {
 
     @Override
     public String toString() {
-        return "Agent {nume=" + nume + ", agentie=" + agentie + "}";
+        return nume + " agentie=" + agentie + "}";
     }
 
 }
