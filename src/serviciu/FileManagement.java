@@ -30,10 +30,10 @@ public class FileManagement {
     }
 
     public void writeFile(String content) {
-        try(FileWriter fileWriter = new FileWriter(FILE_PATH, true);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+        try (FileWriter fileWriter = new FileWriter(FILE_PATH, true);
+             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.write(content + "\n");
-        }   catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -55,9 +55,6 @@ public class FileManagement {
             try (FileWriter fileWriter = new FileWriter(FILE_PATH, false)) {
                 fileWriter.write(outputBuffer.toString());
             }
-//            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_PATH));
-//            bufferedWriter.write(outputBuffer.toString());
-            //Files.write(Path.of(FILE_PATH), outputBuffer, StandardOpenOption.TRUNCATE_EXISTING);
 
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -80,7 +77,6 @@ public class FileManagement {
             }
 
 
-
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -89,4 +85,22 @@ public class FileManagement {
         return -1;
     }
 
+    public boolean whereToInsert(int id) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String line;
+            int index = 0;
+            while ((line = reader.readLine()) != null) {
+                if (id == index) //la randum corect
+                    return true;
+                index++;
+            }
+            return false;
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

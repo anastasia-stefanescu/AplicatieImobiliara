@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public interface InterfataOperatii_simple<T> {
-    void adauga()throws SQLException;
+    void adauga() throws SQLException, IOException;
     void sterge(Scanner scanner) throws SQLException, IOException;
     void listeaza() throws SQLException;
     T citeste(Scanner s) throws SQLException;

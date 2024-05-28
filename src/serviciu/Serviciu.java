@@ -23,7 +23,7 @@ import static java.lang.Math.abs;
 public class Serviciu {
     private static final Serviciu instanta = new Serviciu();
 
-
+    static LocuintaComparator comparatorLocuinte = new LocuintaComparator();
 
 
     private Scanner scanner;
@@ -244,7 +244,7 @@ public class Serviciu {
     }
 
     public List<Locuinta> setup_cautare(Cumparator cump, String[] words) throws SQLException, DateIncomplete {
-        List<Locuinta> locuinte_posibile = new ArrayList<Locuinta>();
+        //List<Locuinta> locuinte_posibile = new ArrayList<Locuinta>();
         List<Proprietar> proprietari_copy = RepoProprietar.getAllProprietari();//ne uitam la proprietarii privati in orice caz
         proprietari_copy.addAll(RepoAgentie.getAllAgentii());
         int nr_camere;
@@ -292,36 +292,45 @@ public class Serviciu {
     }
 
     public List<Locuinta> setup_contactare(Cumparator cump, Agentie agentie) throws SQLException, DateIncomplete {
-        List<Locuinta> locuinte_posibile = new ArrayList<Locuinta>();
-        List<Proprietar> proprietari_copy = new ArrayList<Proprietar>();
+
+        //List<Locuinta> locuinte_posibile = new ArrayList<Locuinta>();
+        List<Proprietar> proprietari_copy = RepoProprietar.getAllProprietari();//ne uitam la proprietarii privati in orice caz
         proprietari_copy.add(agentie);
-
+        int nr_camere;
+        int an1;
+        int an2;
+        String tip;
         List<Zona> zone = new ArrayList<Zona>();
-        System.out.println("Tip locuinta: ");
-        String tip = scanner.nextLine();
-        System.out.println("Nr camere: ");
-        int nr_camere = scanner.nextInt();
-        System.out.println("Anul minim de constructie: ");
-        int an1 = scanner.nextInt();
-        System.out.println("Anul maxim de constructie: ");
-        int an2 = scanner.nextInt();
 
-        Scanner scanner2 = new Scanner(System.in);
-        System.out.println("Zone preferate (scrieti orice, sau stop pt oprire): ");
-        String z = scanner2.nextLine();
-        while (!z.equals("stop"))
-        {
-            Zona zona = servZona.cauta(z);
-            if(zona != null)
-                zone.add(zona);
-            System.out.println("Urmatoarea zona / stop");
-            z = scanner2.nextLine();
-        }
+       //cautare dupa input
+            try {
+                System.out.println("Tip locuinta: ");
+                tip = scanner.nextLine();
+                System.out.println("Nr camere: ");
+                nr_camere = scanner.nextInt();
+                System.out.println("Anul minim de constructie: ");
+                an1 = scanner.nextInt();
+                System.out.println("Anul maxim de constructie: ");
+                an2 = scanner.nextInt();
+
+
+                Scanner scanner2 = new Scanner(System.in);
+                System.out.println("Zone preferate (scrieti orice, sau stop pt oprire): ");
+                String z = scanner2.nextLine();
+                while (!z.equals("stop")) {
+                    Zona zona = servZona.cauta(z);
+                    if (zona != null)
+                        zone.add(zona);
+                    System.out.println("Urmatoarea zona / stop");
+                    z = scanner2.nextLine();
+                }
+            }catch (InputMismatchException mism) {
+                System.out.println("Tip input gresit");
+                return setup_contactare(cump, agentie);
+            }
 
         return cautareLocuinta(cump, proprietari_copy, an1, an2, tip, nr_camere, zone);
-
     }
-
 
 
     public void modificare_preferinte(Cumparator cump) throws SQLException, IOException {
@@ -388,15 +397,19 @@ public class Serviciu {
                 }
             }
             else {
-                throw new DateIncomplete("zona nesetata");
+                if (loc.getZona() == null)
+                    throw new DateIncomplete("zona nesetata");
             }
         }
-        System.out.println("S-au gasit " + locuinte_posibile.size() + " locuinte");
-        for (Locuinta locuinta : locuinte_posibile) {
+
+        List<Locuinta> locuinte2 = comparatorLocuinte.sortComparator(locuinte_posibile);
+
+        System.out.println("S-au gasit " + locuinte2.size() + " locuinte");
+        for (Locuinta locuinta : locuinte2) {
             System.out.println(locuinta);
         }
 
-        return locuinte_posibile;
+        return locuinte2;
 
 
     }

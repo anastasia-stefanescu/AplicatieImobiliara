@@ -5,6 +5,7 @@ import model.Locuinta;
 import model.Proprietar;
 import model.Zona;
 import serviciu.FileManagement;
+import serviciu.LocuintaComparator;
 
 import java.io.IOException;
 import java.sql.*;
@@ -17,6 +18,7 @@ import static java.lang.Math.abs;
 public class RepoLocuinta {
 
     private static int nr_locuinte = 0;
+    static LocuintaComparator compLocuinte = new LocuintaComparator();
 
     FileManagement audit = new FileManagement("/Users/diverse/audit.txt");
     static FileManagement file_locuinte = new FileManagement("/Users/diverse/locuinte.txt");
@@ -68,9 +70,12 @@ public class RepoLocuinta {
         try {
             boolean ok = preparedStatement.execute();
 
+            if (file_locuinte.whereToInsert(locuinta.getId() - 1)) //nauntru
+                file_locuinte.replaceLine(locuinta.toString(), locuinta.getId() - 1);
+            else
                 file_locuinte.writeFile(locuinta.toString());
-                return  ok;
-        }catch (SQLException e) {
+            return true;
+        }catch (SQLException | IOException e) {
             return adauga_Locuinta(locuinta);
         }
     }
@@ -171,7 +176,8 @@ public class RepoLocuinta {
             locuinte.add(loc);
         }
 
-        return locuinte;
+        List<Locuinta> locuinte2 = compLocuinte.sortComparator(locuinte);
+        return locuinte2;
     }
 
 

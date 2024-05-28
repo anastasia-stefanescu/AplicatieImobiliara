@@ -17,7 +17,7 @@ public class ServiciuCumparator implements InterfataOperatii_simple<Cumparator>
     }
 
     @Override
-    public void adauga() throws SQLException {
+    public void adauga() throws SQLException, IOException {
         Cumparator c = new Cumparator(scanner); //automat si citeste datele de intrare
         RepoCumparator.adauga_Cumparator(c);
         //de adaugat la string buffer (audit?)

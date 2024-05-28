@@ -37,7 +37,7 @@ public class RepoCumparator {
         return DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
     }
 
-    public static boolean adauga_Cumparator(Cumparator cumparator) throws SQLException {
+    public static boolean adauga_Cumparator(Cumparator cumparator) throws SQLException, IOException {
         PreparedStatement preparedStatement = getConnection().prepareStatement(ADD_CUMP_SQL);
         nr_cumparatori++;
         cumparator.setId(nr_cumparatori);
@@ -52,7 +52,10 @@ public class RepoCumparator {
         try {
 
             boolean ok = preparedStatement.execute();
-            file_cumparatori.writeFile(cumparator.toString());
+            if (file_cumparatori.whereToInsert(cumparator.getId() - 1)) //nauntru
+                file_cumparatori.replaceLine(cumparator.toString(), cumparator.getId() - 1);
+            else
+                file_cumparatori.writeFile(cumparator.toString());
             return true;
         }catch (SQLException e){
             var b = adauga_Cumparator(cumparator);
